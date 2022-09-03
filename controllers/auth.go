@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rafaelmgr12/jwt-gin/models"
 )
 
 type RegisterInput struct {
@@ -20,5 +21,17 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "validated!"})
+	u := models.User{}
+
+	u.Username = input.Username
+	u.Password = input.Password
+
+	_, err := u.SaveUser()
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "registration sucess!"})
 }
