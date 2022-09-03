@@ -3,9 +3,12 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/rafaelmgr12/jwt-gin/controllers"
+	"github.com/rafaelmgr12/jwt-gin/models"
 )
 
 func main() {
+
+	models.ConnectDataBase()
 
 	r := gin.Default()
 
