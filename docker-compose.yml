@@ -1,16 +1,14 @@
 version: '3'
 services:
   database:
-    image: "mysql"
+    image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
-      - MYSQL_USER=$DB_USER
-      - MYSQL_PASSWORD=$DB_PASSWORD
-      - MYSQL_DATABASE=$DB_NAME
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
     ports:
       - "3306:3306"
-    env_file:
-      - ./.env
     volumes:
       - ./data:/var/lib/mysql
 
@@ -27,5 +25,3 @@ services:
       - "8080:8080"
       env_file:
       - ./.env
-volumes:
-  data: 
